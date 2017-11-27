@@ -7,13 +7,14 @@ namespace MiscUtils.Logging
 {
     public static class DebugLogger
     {
-        private const string Format = "[{3}] - [[{0}:{1}]::{2}] {4}";
+        private const string Format = "[{0}] - [[{1}] [{2}:{3}]::{4}] {5}";
         public static Action<string, object[]> Out = Console.WriteLine;
+        public static string Identifier = nameof(DebugLogger);
 
         [Conditional("DEBUG")]
-        public static void Write(string text, [CallerFilePath] string file = "", [CallerLineNumber] int line = 0, [CallerMemberName] string name = "")
+        public static void Write(string message, [CallerFilePath] string file = "", [CallerLineNumber] int line = 0, [CallerMemberName] string name = "")
         {
-            Out?.Invoke(Format, new object[] { Path.GetFileNameWithoutExtension(file), line, name, DateTime.UtcNow, text, });
+            Write(Format, DateTime.UtcNow.TimeOfDay, Identifier, Path.GetFileName(file), line, name, message);
         }
 
         [Conditional("DEBUG")]
