@@ -24,7 +24,7 @@ namespace MiscUtils.Logging
         {
             if (LoggingLevel <= logMode)
             {
-                Out?.Invoke($"[{DateTime.UtcNow}] {format}", args);
+                Out?.Invoke($"[{logMode.ToString()}] [{DateTime.UtcNow}] {format}", args);
             }
         }
     }
