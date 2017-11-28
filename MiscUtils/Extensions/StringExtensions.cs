@@ -6,5 +6,10 @@
         {
             return s.IndexOfAny(anyOf);
         }
+
+        public static int LastIndexOfAny(this string s, params char[] anyOf)
+        {
+            return s.LastIndexOfAny(anyOf);
+        }
     }
 }

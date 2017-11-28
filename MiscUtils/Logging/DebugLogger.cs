@@ -1,6 +1,6 @@
-﻿using System;
+﻿using MiscUtils.IO;
+using System;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace MiscUtils.Logging
@@ -14,7 +14,12 @@ namespace MiscUtils.Logging
         [Conditional("DEBUG")]
         public static void Write(string message, [CallerFilePath] string file = "", [CallerLineNumber] int line = 0, [CallerMemberName] string name = "")
         {
-            Write(Format, DateTime.UtcNow.TimeOfDay, Identifier, Path.GetFileName(file), line, name, message);
+            Write(Format, DateTime.UtcNow.TimeOfDay,
+                          Identifier,
+                          file.Substring(file.LastIndexOfAny(PathEx.KnownDirectorySeparators) + 1),
+                          line,
+                          name,
+                          message);
         }
 
         [Conditional("DEBUG")]
