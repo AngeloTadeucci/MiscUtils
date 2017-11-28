@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace MiscUtils.IO
 {
@@ -8,6 +9,7 @@ namespace MiscUtils.IO
 
         public static string GetRootDirectory(string path)
         {
+            path = path.Remove(Path.GetPathRoot(path));
             path = path.Trim(KnownDirectorySeparators);
 
             int index;
