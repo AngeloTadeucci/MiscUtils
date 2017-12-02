@@ -7,9 +7,9 @@ namespace MiscUtils.IO
     {
         public static async Task WriteAllBytesAsync(string path, byte[] bytes)
         {
-            using (FileStream fs = File.OpenWrite(path))
+            using (FileStream fs = FileEx.OpenWrite(path))
             {
-                await fs.WriteAsync(bytes, 0, bytes.Length);
+                await fs.WriteAsync(bytes, 0, bytes.Length).ConfigureAwait(false);
             }
         }
 
@@ -19,10 +19,15 @@ namespace MiscUtils.IO
             {
                 byte[] result = new byte[fs.Length];
 
-                await fs.ReadAsync(result, 0, result.Length);
+                await fs.ReadAsync(result, 0, result.Length).ConfigureAwait(false);
 
                 return result;
             }
+        }
+
+        public static FileStream OpenWrite(string path)
+        {
+            return File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
         }
 
         #region Storage formats

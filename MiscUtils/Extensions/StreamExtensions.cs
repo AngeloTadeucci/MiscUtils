@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using MiscUtils.IO;
 
 namespace MiscUtils
 {
@@ -10,7 +11,7 @@ namespace MiscUtils
         {
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
 
-            using (FileStream fs = File.OpenWrite(destinationPath))
+            using (FileStream fs = FileEx.OpenWrite(destinationPath))
             {
                 stream.CopyTo(fs);
             }
@@ -20,7 +21,7 @@ namespace MiscUtils
         {
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
 
-            using (FileStream fs = File.OpenWrite(destinationPath))
+            using (FileStream fs = FileEx.OpenWrite(destinationPath))
             {
                 stream.CopyTo(fs, bufferSize);
             }
@@ -30,9 +31,9 @@ namespace MiscUtils
         {
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
 
-            using (FileStream fs = File.OpenWrite(destinationPath))
+            using (FileStream fs = FileEx.OpenWrite(destinationPath))
             {
-                await stream.CopyToAsync(fs);
+                await stream.CopyToAsync(fs).ConfigureAwait(false);
             }
         }
 
@@ -40,9 +41,9 @@ namespace MiscUtils
         {
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
 
-            using (FileStream fs = File.OpenWrite(destinationPath))
+            using (FileStream fs = FileEx.OpenWrite(destinationPath))
             {
-                await stream.CopyToAsync(fs, bufferSize);
+                await stream.CopyToAsync(fs, bufferSize).ConfigureAwait(false);
             }
         }
 
@@ -50,9 +51,9 @@ namespace MiscUtils
         {
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
 
-            using (FileStream fs = File.OpenWrite(destinationPath))
+            using (FileStream fs = FileEx.OpenWrite(destinationPath))
             {
-                await stream.CopyToAsync(fs, bufferSize, cancellationToken);
+                await stream.CopyToAsync(fs, bufferSize, cancellationToken).ConfigureAwait(false);
             }
         }
     }
