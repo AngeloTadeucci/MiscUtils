@@ -22,5 +22,10 @@ namespace MiscUtils.IO
                 return String.Empty;
             }
         }
+
+        public static string RemoveExtension(string path)
+        {
+            return Path.ChangeExtension(path, null);
+        }
     }
 }
