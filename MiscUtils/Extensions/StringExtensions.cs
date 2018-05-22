@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace MiscUtils
 {
@@ -24,6 +25,28 @@ namespace MiscUtils
             {
                 return s;
             }
+        }
+
+        public static byte[] FromHexToBytes(this string s)
+        {
+            byte[] result = new byte[s.Length / 2];
+
+            for (int i = 0, j = 0; j < s.Length; i++, j += 2)
+            {
+                if (!Byte.TryParse(s.Substring(j, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat, out byte b))
+                {
+                    return null;
+                }
+
+                result[i] = b;
+            }
+
+            return result;
+        }
+
+        public static bool Contains(this string source, string value, StringComparison comparison)
+        {
+            return source?.IndexOf(value, comparison) >= 0;
         }
     }
 }

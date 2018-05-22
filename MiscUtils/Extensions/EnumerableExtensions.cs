@@ -1,10 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MiscUtils
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<T> ThrowIfEmpty<T>(this IEnumerable<T> source)
+        {
+            if (!source.Any())
+            {
+                throw new EnumerableEmptyException();
+            }
+
+            return source;
+        }
+
         public static Dictionary<TKey, TSource> ToDictionaryDupes<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
             => source.ToDictionaryDupes(keySelector, x => x, null);
 
