@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Linq;
 
 namespace MiscUtils.Logging
 {
     public static class SimpleLogger
     {
+        private static readonly int LongestLogModeNameLength = Enum.GetNames(typeof(LogMode)).Max(s => s.Length);
+        private static readonly char PaddingChar = ' ';
+
         public static LogMode LoggingLevel;
         public static Action<string, object[]> Out = Console.WriteLine;
 
@@ -24,7 +28,7 @@ namespace MiscUtils.Logging
         {
             if (LoggingLevel <= logMode)
             {
-                Out?.Invoke($"[{logMode.ToString()}] [{DateTime.UtcNow}] {format}", args);
+                Out?.Invoke($"[{logMode.ToString().PadRight(LongestLogModeNameLength, PaddingChar)}] [{DateTime.UtcNow.ToString("O")}] {format}", args);
             }
         }
     }
