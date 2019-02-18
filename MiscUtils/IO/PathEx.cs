@@ -27,5 +27,22 @@ namespace MiscUtils.IO
         {
             return Path.ChangeExtension(path, null);
         }
+
+        public static string GetSafeFilename(string filename)
+        {
+            if (String.IsNullOrWhiteSpace(filename))
+            {
+                return "invalid_filename." + Guid.NewGuid().ToString();
+            }
+
+            string safeFilename = String.Join("", filename.Split(Path.GetInvalidFileNameChars())).TrimEnd(' ');
+
+            if (String.IsNullOrWhiteSpace(safeFilename))
+            {
+                return "invalid_filename." + Guid.NewGuid().ToString();
+            }
+
+            return safeFilename;
+        }
     }
 }
