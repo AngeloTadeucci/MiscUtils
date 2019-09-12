@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 
 namespace MiscUtils
@@ -7,7 +8,7 @@ namespace MiscUtils
     {
         public static string ReadNullTerminatedString(this BinaryReader br)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             char c;
             while ((c = br.ReadChar()) != '\0')
@@ -16,6 +17,13 @@ namespace MiscUtils
             }
 
             return sb.ToString();
+        }
+
+        public static T SetPositionAndRead<T>(this BinaryReader br, long position, Func<T> readFunc)
+        {
+            br.BaseStream.Position = position;
+
+            return readFunc();
         }
     }
 }
