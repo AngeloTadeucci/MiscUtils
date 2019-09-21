@@ -44,5 +44,10 @@ namespace MiscUtils.IO
 
             return safeFilename;
         }
+
+        public static bool ExtensionEquals(string filename, string extension)
+        {
+            return String.Compare(Path.GetExtension(filename), extension, StringComparison.OrdinalIgnoreCase) == 0;
+        }
     }
 }
