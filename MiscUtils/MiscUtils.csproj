@@ -38,9 +38,4 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Reactive" Version="4.3.2" />
-    <PackageReference Include="System.Reactive.PlatformServices" Version="4.3.2" />
-  </ItemGroup>
-
 </Project>

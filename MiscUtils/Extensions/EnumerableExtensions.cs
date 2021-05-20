@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Disposables;
 
 namespace MiscUtils
 {
@@ -49,22 +48,6 @@ namespace MiscUtils
             }
 
             return dictionary;
-        }
-
-        public static IDisposable AsDisposable<T>(this IEnumerable<T> source) where T : IDisposable
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            return Disposable.Create(() =>
-            {
-                foreach (var d in source)
-                {
-                    d?.Dispose();
-                }
-            });
         }
     }
 }
