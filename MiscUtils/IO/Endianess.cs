@@ -1,8 +1,6 @@
-﻿namespace MiscUtils.IO
-{
-    public enum Endianess
-    {
-        Little = 0,
-        Big,
-    }
+﻿namespace MiscUtils.IO;
+
+public enum Endianess {
+    Little = 0,
+    Big,
 }

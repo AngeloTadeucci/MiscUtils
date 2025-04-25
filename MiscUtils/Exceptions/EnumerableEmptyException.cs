@@ -1,13 +1,11 @@
 ﻿using System;
 
-namespace MiscUtils
-{
-    public class EnumerableEmptyException : Exception
-    {
-        public EnumerableEmptyException() { }
+namespace MiscUtils;
 
-        public EnumerableEmptyException(string message) : base(message) { }
+public class EnumerableEmptyException : Exception {
+    public EnumerableEmptyException() { }
 
-        public EnumerableEmptyException(string message, Exception inner) : base(message, inner) { }
-    }
+    public EnumerableEmptyException(string message) : base(message) { }
+
+    public EnumerableEmptyException(string message, Exception inner) : base(message, inner) { }
 }

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.IO;
 
-namespace MiscUtils
-{
-    public static class BinaryWriterExtensions
-    {
-        public static void SetPositionAndWrite<T>(this BinaryWriter bw, long position, Action<T> writeFunc, T value)
-        {
-            bw.BaseStream.Position = position;
+namespace MiscUtils;
 
-            writeFunc(value);
-        }
+public static class BinaryWriterExtensions {
+    public static void SetPositionAndWrite<T>(this BinaryWriter bw, long position, Action<T> writeFunc, T value) {
+        bw.BaseStream.Position = position;
+
+        writeFunc(value);
     }
 }

@@ -1,48 +1,37 @@
 ﻿using System.IO;
 
-namespace MiscUtils.IO
-{
-    public class UnbufferedStreamReader : TextReader
-    {
-        private readonly bool LeaveOpen;
+namespace MiscUtils.IO;
 
-        public Stream Stream { get; }
+public class UnbufferedStreamReader : TextReader {
+    private readonly bool LeaveOpen;
 
-        public UnbufferedStreamReader(Stream stream) : this(stream, false)
-        {
+    public UnbufferedStreamReader(Stream stream) : this(stream, false) { }
 
-        }
+    public UnbufferedStreamReader(Stream stream, bool leaveOpen) {
+        Stream = stream;
+        LeaveOpen = leaveOpen;
+    }
 
-        public UnbufferedStreamReader(Stream stream, bool leaveOpen)
-        {
-            this.Stream = stream;
-            this.LeaveOpen = leaveOpen;
-        }
+    public Stream Stream { get; }
 
-        public override int Peek()
-        {
-            int result = this.Stream.ReadByte();
-            this.Stream.Position--;
+    public override int Peek() {
+        int result = Stream.ReadByte();
+        Stream.Position--;
 
-            return result;
-        }
+        return result;
+    }
 
-        public override int Read()
-        {
-            return this.Stream.ReadByte();
-        }
+    public override int Read() {
+        return Stream.ReadByte();
+    }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (!this.LeaveOpen)
-                {
-                    this.Stream.Dispose();
-                }
+    protected override void Dispose(bool disposing) {
+        if (disposing) {
+            if (!LeaveOpen) {
+                Stream.Dispose();
             }
-
-            base.Dispose(disposing);
         }
+
+        base.Dispose(disposing);
     }
 }

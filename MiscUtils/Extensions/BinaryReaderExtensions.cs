@@ -2,28 +2,23 @@
 using System.IO;
 using System.Text;
 
-namespace MiscUtils
-{
-    public static class BinaryReaderExtensions
-    {
-        public static string ReadNullTerminatedString(this BinaryReader br)
-        {
-            var sb = new StringBuilder();
+namespace MiscUtils;
 
-            char c;
-            while ((c = br.ReadChar()) != '\0')
-            {
-                sb.Append(c);
-            }
+public static class BinaryReaderExtensions {
+    public static string ReadNullTerminatedString(this BinaryReader br) {
+        var sb = new StringBuilder();
 
-            return sb.ToString();
+        char c;
+        while ((c = br.ReadChar()) != '\0') {
+            sb.Append(c);
         }
 
-        public static T SetPositionAndRead<T>(this BinaryReader br, long position, Func<T> readFunc)
-        {
-            br.BaseStream.Position = position;
+        return sb.ToString();
+    }
 
-            return readFunc();
-        }
+    public static T SetPositionAndRead<T>(this BinaryReader br, long position, Func<T> readFunc) {
+        br.BaseStream.Position = position;
+
+        return readFunc();
     }
 }
